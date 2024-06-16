@@ -1,0 +1,14 @@
+nav{
+    background-color: bisque;
+}
+
+.product{
+    border: 1px solid white;
+    padding: 10px;
+    box-shadow: 1px 1px 1px 1px wheat;
+}
+
+.product img{
+    height: 100px;
+    margin: auto;
+}

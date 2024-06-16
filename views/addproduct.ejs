@@ -1,0 +1,41 @@
+<%- include('includes/head.ejs') %>
+
+</head>
+<body>
+<%- include('includes/navigation.ejs') %>
+    
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-nd-12">
+                    <h2 class="text-center my-2"><%= edit ? 'Edit Product' : 'ADD Product' %> </h2>
+                    <form method='POST' action="<%= edit ? '/products/edit' : '/products/add'%> ">
+                        <% if (edit) {%>
+                            <input type="hidden" name="productId" value="<%= product.id %> ">
+                        <% } %>    
+                        <p>
+                            <label for="title" class="text-center my-1">Title</label>
+                            <input type="text" class="form-control" name="title" value="<%= edit ? product.title : '' %>">
+                        </p>
+                        <p>
+                            <label for="image" class="text-center my-1">Image url</label>
+                            <input type="text" class="form-control" name="image" value="<%= edit ? product.image : '' %>">
+                        </p>
+                        <p>
+                            <label for="price" class="text-center my-1">Price</label>
+                            <input type="number" step="any" class="form-control" name="price" value="<%= edit ? product.price : '' %>">
+                        </p>
+                        <p>
+                            <label for="description" class="text-center my-1">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10" class="form-control"><%= edit ? product.description : '' %></textarea>
+                        </p>
+                        <p>
+                            <button class="btn btn-outline-primary"><%= edit ? 'Edit Product' : 'Add Product' %></button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+<%- include('includes/footer.ejs') %>
