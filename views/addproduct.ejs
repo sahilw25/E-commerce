@@ -9,7 +9,10 @@
             <div class="row">
                 <div class="col-nd-12">
                     <h2 class="text-center my-2"><%= edit ? 'Edit Product' : 'Add Product' %> </h2>
-                    <form method='POST' action="/products/add">  
+                    <form method='POST' action="<%= edit ? '/products/edit' : '/products/add' %> ">  
+                        <% if(edit) { %>
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                        <% } %>    
                         <p>
                             <label for="title" class="text-center my-1">Title</label>
                             <input type="text" class="form-control" name="title" value="<%= edit ? product.title : '' %>">
