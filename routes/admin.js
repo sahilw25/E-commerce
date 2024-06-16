@@ -12,7 +12,7 @@ router.post('/add', postAddProductPage);
 
 router.get('/edit/:productId', getEditProductPage);
 
-router.post('/edit', postEditProductPage)
+
 
 
 // router.get('/users',(req, res, next)=>{

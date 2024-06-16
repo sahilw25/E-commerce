@@ -43,15 +43,4 @@ exports.getEditProductPage = (req, res) => {
     });  
 };
 
-exports.postEditProductPage = (req, res) => {
-    const product = {
-      id: req.body.productId,
-      title: req.body.title,
-      price: req.body.price,
-      description: req.body.description,
-      image: req.body.image
-    };
-    updateProductById(product, req.body.productId);
-    res.redirect('/products');
-  };
 
