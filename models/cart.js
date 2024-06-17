@@ -1,15 +1,24 @@
 const fs = require('fs');
 const rootDir = require('../util/path');
 const path = require('path');
-exports.addProductToCart = (productId, productPrice) => {
+
+const getCartDetailFromFile = (callBack) => {
     const cartPath = path.join(rootDir, 'data', 'cart.json');
     fs.readFile(cartPath, (error, cartContent) => {
-        let cart = {products: [], totalPrice: 0};
+        let cart = {products: []};
 
         if(!error){
             cart = JSON.parse(cartContent);
         }
 
+        return callBack(cart);
+    });
+}
+
+exports.addProductToCart = (productId, productPrice) => {
+    const cartPath = path.join(rootDir, 'data', 'cart.json');
+
+    getCartDetailFromFile(cart => {
         let existingProductIndex = cart.products.findIndex((prod) => prod.id.toString() == productId);
         let updatedProduct;
 
@@ -22,9 +31,21 @@ exports.addProductToCart = (productId, productPrice) => {
             updatedProduct = { id: productId, quantity:1};
             cart.products = [...cart.products, updatedProduct];
         }
-        cart.totalPrice += +productPrice;
+
         fs.writeFile(cartPath, JSON.stringify(cart), (error) => {
             console.log(error);
-        })
+        });
+    });
+};
+
+exports.deleteProductFromCart = (productId) => {
+    const cartPath = path.join(rootDir, 'data', 'cart.json');
+    getCartDetailFromFile(cart => {
+        let cartProducts = cart.products;
+        let updatedCartProducts = cartProducts.filter(prod => prod.id.toString() != productId.toString());
+
+        fs.writeFile(cartPath, JSON.stringify(updatedCartProducts), (error) => {
+            console.log(error);
+        });
     });
 };
