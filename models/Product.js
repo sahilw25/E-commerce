@@ -48,3 +48,14 @@ exports.updateProductById = (product, productId) => {
         });
     });
 };
+
+exports.deleteProductById = (productId, callBack) => {
+    const productPath = path.join(roothDir, 'data', 'products.json');
+    getProductsFromFile(products => {
+        let updatedProducts = products.filter(product => product.id.toString() !== productId.toString() );
+        fs.writeFile(productPath, JSON.stringify(updatedProducts), error => {
+            console.log(error);
+        });
+        callBack();
+    });
+};

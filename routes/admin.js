@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAddProductPage, postAddProductPage, getAdminProductPage, getEditProductPage, postEditProductPage } = require('../controllers/admin/ProductController.js');
+const { getAddProductPage, postAddProductPage, getAdminProductPage, getEditProductPage, postEditProductPage, postDeleteProductPage } = require('../controllers/admin/ProductController.js');
 const router = express.Router();
 
 
@@ -13,6 +13,8 @@ router.post('/add', postAddProductPage);
 router.get('/edit/:productId', getEditProductPage);
 
 router.post('/edit', postEditProductPage);
+
+router.post('/delete', postDeleteProductPage);
 
 
 // router.get('/users',(req, res, next)=>{

@@ -1,4 +1,4 @@
-const { saveProducts, fetchAllProducts, getProductById, updateProductById} = require("../../models/Product");
+const { saveProducts, fetchAllProducts, getProductById, updateProductById, deleteProductById} = require("../../models/Product");
 
 exports.getAddProductPage = (req, res) => {
     const viewsdata = {
@@ -53,4 +53,11 @@ exports.postEditProductPage = (req, res) => {
     };
     updateProductById(product, req.body.productId);
     res.redirect('/products');
+};
+
+exports.postDeleteProductPage = (req, res) => {
+    const productId = req.body.productId;
+    deleteProductById(productId, () => {
+        res.redirect('/products');
+    });
 };
