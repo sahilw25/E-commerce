@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const roothDir = require('../util/path');
+const db = require('../util/database');
 const { error } = require('console');
 const { deleteProductFromCart } = require('./cart');
 
@@ -16,25 +17,15 @@ const getProductsFromFile = (callBack) => {
 };
 
 exports.saveProducts = (product) => {
-    const productPath = path.join(roothDir, 'data', 'products.json');
-
-    getProductsFromFile((productsData) => { 
-        productsData.push(product);
-        fs.writeFile(productPath, JSON.stringify(productsData), (error) => {
-            console.log(error);
-        });
-    });
+    return db.execute(`insert into products (title, imageurl, description, price) values(?,?,?,?)`, [product.title, product.imageurl, product.description, product.price]);
 };
 
-exports.fetchAllProducts = (callBack) => {
-    getProductsFromFile(callBack);
+exports.fetchAllProducts = () => {
+    return db.execute(`Select * from products`);
 };
 
-exports.getProductById = (productId, callBack) => {
-    getProductsFromFile((products) => {
-        const product = products.find((p) => p.id.toString() === productId);
-        callBack(product);
-    });
+exports.getProductById = (productId) => {
+    return db.execute(`select * from products where id = ?`, [productId]);
 };
 
 exports.updateProductById = (product, productId) => {

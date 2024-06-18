@@ -10,24 +10,32 @@ exports.getAddProductPage = (req, res) => {
 
 exports.postAddProductPage = (req, res) => {
     const product = {
-        id: Date.now(),
         title: req.body.title,
-        image: req.body.image,
+        imageurl: req.body.image,
         price: req.body.price,
         description: req.body.description
     };
-    saveProducts(product);
-    res.redirect('/');
+    saveProducts(product)
+    .then(([product]) => {
+        res.redirect('/');
+    }).catch((error) => {
+        console.log(error);
+    });
+    
 };
 
 exports.getAdminProductPage = (req, res) => {
-    fetchAllProducts((products) => {
+    fetchAllProducts()
+    .then(([products]) => {
         const viewsdata = {
             admin: true,
             pageTitle: 'Admin Products',
             products
         };
         res.render('product-list', viewsdata);
+    })
+    .catch((error) => {
+        console.log(error);
     });
 };
 

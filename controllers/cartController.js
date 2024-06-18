@@ -12,7 +12,8 @@ exports.postCartPage = (req, res) => {
 exports.getCartPage = (req, res) => {
   getCartDetailsFromFile((cart) => {
     const cartProducts = cart.products;
-    fetchAllProducts((products) => {
+    fetchAllProducts()
+    .then(([products]) => {
       const productsData = [];
       let totalPrice = 0;
       for (let cartItem of cartProducts) {
@@ -29,6 +30,8 @@ exports.getCartPage = (req, res) => {
       };
 
       res.render('cartDetails', viewsData);
+    }).catch((error) => {
+      console.log(error);
     });
   });
 };
