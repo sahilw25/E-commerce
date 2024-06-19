@@ -19,7 +19,7 @@
                         </p>
                         <p>
                             <label for="image" class="text-center my-1">Image url</label>
-                            <input type="text" class="form-control" name="image" value="<%= edit ? product.image : '' %>">
+                            <input type="text" class="form-control" name="image" value="<%= edit ? product.imageurl : '' %>">
                         </p>
                         <p>
                             <label for="price" class="text-center my-1">Price</label>
@@ -28,6 +28,15 @@
                         <p>
                             <label for="description" class="text-center my-1">Description</label>
                             <textarea name="description" id="description" cols="30" rows="10" class="form-control"><%= edit ? product.description : '' %></textarea>
+                        </p>
+                        <p>
+                            <label for="">Category</label>
+                            <select name="categoryId" id="" class="form-control">
+                                <option value="">Category</option>
+                                <% for (let category of categories) { %>
+                                    <option value="<%= category.id %>" <%= edit && category.id === product.categoryId ? "selected" : ""  %>><%= category.title %></option>
+                                <% } %>
+                            </select>
                         </p>
                         <p>
                             <button class="btn btn-outline-primary"><%= edit ? 'Edit Product' : 'Add Product' %></button>

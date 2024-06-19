@@ -1,19 +1,25 @@
 const { addProductToCart, getCartDetailsFromFile, deleteProductFromCart } = require('../models/cart');
 const { getProductById, fetchAllProducts } = require('../models/Product');
+const Product = require('../models/ProductModel');
 
 exports.postCartPage = (req, res) => {
   const productId = req.body.productId;
-  getProductById(productId, (product) => {
+  Product.findByPk(productId)
+  .then((product) => {
     addProductToCart(productId, product.price);
     res.redirect('/');
-  });
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 };
 
 exports.getCartPage = (req, res) => {
   getCartDetailsFromFile((cart) => {
     const cartProducts = cart.products;
-    fetchAllProducts()
-    .then(([products]) => {
+
+    Product.findAll()
+    .then((products) => {
       const productsData = [];
       let totalPrice = 0;
       for (let cartItem of cartProducts) {

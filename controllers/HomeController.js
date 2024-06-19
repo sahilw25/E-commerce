@@ -1,8 +1,13 @@
+const { where } = require("sequelize");
 const {fetchAllProducts, getProductById } = require("../models/Product");
+const Product = require("../models/ProductModel");
+const Category = require("../models/CategoryModel");
 
 exports.getHomePage = (req, res) =>{
-    fetchAllProducts()
-    .then(([products]) => {
+
+    Product.findAll({include: Category})
+    .then((products) => {
+        console.log(products);
         const viewsdata = {
             admin: false,
             products,
@@ -17,14 +22,16 @@ exports.getHomePage = (req, res) =>{
 
 exports.getProductDetailPage = (req, res) => {
     const productId = req.params.productId;
-    getProductById(productId)
-    .then(([product]) => {
+
+    Product.findAll({where: {id: productId}})
+    .then((product) => {
         const viewsdata = {
             product: product[0],
             pageTitle: product[0].title
         };
         res.render('ProductDetail', viewsdata);
-    }).catch((error) => {
+    })
+    .catch((error) => {
         console.log(error);
     });
 };
