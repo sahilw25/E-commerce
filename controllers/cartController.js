@@ -46,14 +46,17 @@ exports.getCartPage = (req, res) => {
   })
   .then((cartProducts) => {
     let totalPrice = 0;
+    let cartproducts;//refers to products in cart
     if(cartProducts){
       for(let product of cartProducts){
         totalPrice += +product.cartItem.quantity * +product.price;
+        cartproducts = cartProducts[0].cartItem;
       }
     }
     const viewsData = {
     pageTitle: 'Cart Details',
-    cartProducts,
+    cartproducts,// this refers to products in cart
+    cartProducts,// this refers to cart
     totalPrice
   };
 
