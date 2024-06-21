@@ -2,6 +2,7 @@ const { where } = require("sequelize");
 const { saveProducts, fetchAllProducts, getProductById, updateProductById, deleteProductById} = require("../../models/Product");
 const Product = require("../../models/ProductModel");
 const Category = require("../../models/CategoryModel");
+const User = require("../../models/UserModel");
 
 exports.getAddProductPage = (req, res) => {
     Category.findAll({attributes: ['id', 'title']})
@@ -35,12 +36,15 @@ exports.postAddProductPage = (req, res) => {
     Category.findByPk(categoryId)
     .then((category) => {
         categoryObj = category;
-        return Product.create(product);
-    }).then((productObj) => {
+        return req.user.createProduct(product);
+    })
+    .then((productObj) => {
         return productObj.setCategory(categoryObj);
-    }).then(() => {
+    })
+    .then(() => {
         res.redirect('/');
-    }).catch((error) => {
+    })
+    .catch((error) => {
         console.log(error);
     });
 
@@ -63,7 +67,7 @@ exports.postAddProductPage = (req, res) => {
 };
 
 exports.getAdminProductPage = (req, res) => {
-    Product.findAll({include: Category})
+    Product.findAll({include: [{model : Category}, {model : User}]})
     .then((products) => {
         const viewsdata = {
             admin: true,

@@ -2,10 +2,11 @@ const { where } = require("sequelize");
 const {fetchAllProducts, getProductById } = require("../models/Product");
 const Product = require("../models/ProductModel");
 const Category = require("../models/CategoryModel");
+const User = require("../models/UserModel");
 
 exports.getHomePage = (req, res) =>{
 
-    Product.findAll({include: Category})
+    Product.findAll({include: [{model : Category}, {model : User}]})
     .then((products) => {
         console.log(products);
         const viewsdata = {

@@ -1,7 +1,8 @@
 const Category = require('../../models/CategoryModel');
+const User = require('../../models/UserModel');
 
 exports.getCategoryPage = (req, res) => {
-    Category.findAll().then((categories) => {
+    Category.findAll({include: User}).then((categories) => {
         const viewsData = {
         pageTitle : 'Categories List',
         categories
@@ -29,7 +30,8 @@ exports.postAddCategoryPage = (req, res) => {
         description : req.body.description
     }
 
-    Category.create(categ)
+    req.user
+    .createCategory({title, description})
     .then(() => {
     res.redirect('/categories');
     })

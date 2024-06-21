@@ -5,7 +5,11 @@ nav{
 .product{
     border: 1px solid white;
     padding: 10px;
-    box-shadow: 1px 1px 1px 1px wheat;
+    padding-bottom: 10px;
+    /* box-shadow: 1px 1px 1px 1px rgb(66, 66, 66); */
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+
+    margin-bottom: 30px;
 }
 
 .product img{

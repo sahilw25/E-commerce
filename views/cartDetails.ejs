@@ -10,33 +10,41 @@
                 <div class="col-md-12">
                     <h2>Cart Details</h2>
                     <hr/>
-
-                    <div class="cart-details">
-                        <div class="cart-title d-flex text-end">
-                            <div>Product Name</div>
-                            <div>Quantity</div>
-                            <div>Price per Product</div>
-                            <div>Total Price</div>
-                            <div>Actions</div>
-                        </div>
-                        <% for(let product of cartProducts) { %>
-                        <div class="cart-product d-flex">
-                            <div><%= product.title %></div>
-                            <div><%= product.quantity %></div>
-                            <div>$<%= product.price %></div>
-                            <div>$<%= product.cartPrice %></div>
-                            <div>
-                                <form action="/cart/delete-item" method="post">
-                                    <input type="hidden" name="productId" value="<%= product.id  %>">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+                    <% if(cartProducts){ %>
+                        <div class="cart-details">
+                            <div class="cart-title d-flex text-end">
+                                <div>Product Name</div>
+                                <div>Quantity</div>
+                                <div>Price per Product</div>
+                                <div>Total Price</div>
+                                <div>Actions</div>
+                            </div>
+                            <% for(let product of cartProducts) { %>
+                            <div class="cart-product d-flex">
+                                <div><%= product.title %></div>
+                                <div><%= product.cartItem.quantity %></div>
+                                <div>$<%= product.price %></div>
+                                <div>$<%= +product.cartItem.quantity * +product.price %></div>
+                                <div>
+                                    <form action="/cart/delete-item" method="post">
+                                        <input type="hidden" name="productId" value="<%= product.id  %>">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <% } %>
+                            <div class="text-end">
+                                <h3>TotalPrice: $<%= totalPrice %></h3>
                             </div>
                         </div>
-                        <% } %>
-                        <div class="text-end">
-                            <h3>TotalPrice: $<%= totalPrice %></h3>
+                        <div class="text-center my-3">
+                            <form action="/order" method="POST">
+                                <button class="btn btn-primary" >Order Now!</button>
+                            </form>
                         </div>
-                    </div>
+                    <% } else{ %>
+                        <div>NO products in cart</div>
+                    <% } %>
                 </div>
             </div>
         </div>
