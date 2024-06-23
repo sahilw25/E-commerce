@@ -1,5 +1,5 @@
 <%- include('../../includes/head.ejs') %>
-
+<link rel="stylesheet" href="/css/add.css">
   </head>
   <body>
     <%- include('../../includes/navigation.ejs') %>
@@ -12,14 +12,16 @@
                     <h1>Add Category</h1>
 
                     <form action="/categories/add" method="POST">
-                        <p>
-                            <label for="">Title</label>
-                            <input type="text" name="title" class="form-control">
-                        </p>
-                        <p>
-                            <label for="">Description</label>
-                            <textarea class="form-control" name="description"></textarea>
-                        </p>
+
+                        <div class="input-box">
+                        <input type="text" name="title">
+                        <label>Title</label>
+                        </div>
+
+                        <div class="message-box">
+                            <textarea name="description"  placeholder="Enter description" required style="padding:5px;"></textarea>
+                        </div>
+
                         <p>
                             <button class="btn btn-primary">Add Category</button>
                         </p>

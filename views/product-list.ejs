@@ -2,55 +2,71 @@
 </head>
 <body>
     <%- include('includes/navigation.ejs') %>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1><%= (admin)? 'Admin Product List' : 'Product List' %> </h1>
+    
+    <ul class="product-list">
+      <% if (products.length){ %>
+        <% for(let product of products){ %>
+          <li>
+              <div class="product-card">
 
-                    <% if (products.length){ %>
-                        <div class="row">
-                            <% for(let product of products){ %>
-                                <div class="col-md-3">
-                                    <div class="product">
-                                        <div class="text-center">
-                                            <img src="<%= product.image %>" class="img-fluid" alt="">
-                                        </div>
-                                        <h3><%= product.title %></h3>
-                                        <div>Category: <%= product.category.title %></div>
-                                        <div>User: <%= product.User.name %></div>
-                                        <div>Price: <strong>$<%= product.price %></strong></div>
-                                        <p><%= product.description %></p>
-                                        <% if(admin) { %>
-                                            <div class="my-2 text-center d-flex justify-content-center">
-                                                <a href="/products/edit/<%= product.id  %>" class="btn btn-primary mx-2">Edit</a>
-                                                <form action="/products/delete" method="POST">
-                                                    <input type="hidden" name="productId" value="<%= product.id %>">
-                                                    <button class="btn btn-danger">Delete</button>
-                                                </form>
+                <figure class="card-banner">
 
-                                                
-                                            </div>
-                                        <% } else{ %>
-                                        <div class="my-2 text-center d-flex justify-content-center">
-                                            <a href="/product/details/<%= product.id  %>" class="btn btn-primary mx-2">View details</a>
-                                            <%- include('includes/cartButton.ejs', {product:product})  %>
-                                        </div>
-                                        <% } %>
-                                    </div>
-                                </div>
-                                
-                            <% } %>    
-                        </div>
-                    <% }else{%>
-                        <div>
-                            <h3 style="color: red;">No Products Available</h3>
-                        </div>
+                  <a href="/product/details/<%= product.id  %>" >
+                    <img src="<%= product.imageurl %>" alt="chair view" loading="lazy" width="800" height="1034" class="w-100">
+                  </a>
+                  <div class="card-actions">
 
-                    <% } %>
+
+                    <% if(admin) { %>
+                      <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                          <a href="/products/edit/<%= product.id  %>" class="btn btn-secondary">Edit</a>
+                          <form action="/products/delete" method="POST">
+                              <input type="hidden" name="productId" value="<%= product.id %>">
+                              <button class="btn btn-danger">Delete</button>
+                          </form>   
+                        </div>         
+                      </div>
+                    <% } else{ %>  
+                      <a href="" class=" btn card-action-btn book-btn" >
+                        <%- include('includes/cartButton.ejs', {product:product})  %>
+                      </a>
+                  <% } %>
+                    
+                  </div>
+                </figure>
+
+                <div class="card-content">
+                  <h3 class="h4 card-title">
+                    <a href="#"><%= product.title %></a>
+                  </h3>
+                  
+                  <div class="location">
+                    <p class="loc">
+                      <%= product.category.title %>
+                    </p>
+                  </div>
+
+                  <div class="rating">
+                    <p>5 <i class="fa fa-star" aria-hidden="true"></i></p>
+                  </div>
+
+                  <div class="card-price">
+                    <data value="48.75">&#x20b9;<%= product.price %></data>
+
+                    <data value="65.00">&#x20b9;<%= product.Initialprice %></data>
+                  </div>
                 </div>
-            </div>
-        </div>
-        
-    </main>
+
+              </div>
+          </li>
+        <% } %>  
+      <% }else{ %>  
+        <div>
+          <h3 style="color: red;">No Products Available</h3>
+      </div>
+
+  <% } %>
+  </ul>
+
     <%- include('includes/footer.ejs') %>

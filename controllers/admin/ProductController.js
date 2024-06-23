@@ -26,11 +26,13 @@ exports.postAddProductPage = (req, res) => {
 
     const product = {
         title: req.body.title,
-        imageurl: req.body.image,
+        imageurl: req.body.imageurl,
+        Initialprice: req.body.Initialprice,
         price: req.body.price,
         description: req.body.description,
+        image: req.body.image
     };
-
+    
     let categoryObj;
 
     Category.findByPk(categoryId)

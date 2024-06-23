@@ -1,21 +1,93 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">E-Commerce</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-          <a class="nav-link" href="/users">Users</a>
-          <a class="nav-link" href="/products/add">Add</a>
-          <a class="nav-link" href="/cart">Cart</a>
-          <a class="nav-link" href="/products">Admin</a>
-          <a class="nav-link" href="/categories">Categories</a>
-          <a class="nav-link" href="/order">Orders</a>
-          <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+<header class="header" data-header>
+  <div class="container">
 
-        </div>
-      </div>
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-search">
+      <!-- <input type="search" name="search" placeholder="Search Product..." class="input-field">
+
+      <button class="search-btn" aria-label="Search">
+        <ion-icon name="search-outline"></ion-icon>
+      </button>  -->       
     </div>
-  </nav>
+
+    <a href="/" class="logo">
+      <img src="/images/AREA logo.png" alt="AREA logo" width="130" height="31">
+    </a>
+
+    <div class="header-actions">
+
+      <button class="header-action-btn">
+        <i class="fa fa-user" aria-hidden="true"></i>
+                    <a href=#><p class='header-action-label'>Sign in</p></a>
+          
+      </button>
+
+            <a href='logout.php'>
+                <div class='logout'>
+                <i class='fa fa-telegram' aria-hidden='true'></i>
+                <p>Log-Out</p>
+                </div>
+            </a>
+      
+    </div>
+
+    <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar" data-navbar>
+
+      <div class="navbar-top">
+
+        <a href="/" class="logo">
+          <img src="/images/AREA logo.png" alt="PlaySpot logo" width="130" height="31">
+        </a>
+
+        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <ul class="navbar-list">
+
+        <li>
+          <a href="/" class="navbar-link">Home</a>
+        </li>
+
+        <!-- <li>
+          <a href="/users" class="navbar-link">Users</a>
+        </li> -->
+
+        <li>
+          <a href="/products/add" class="navbar-link">Add</a>
+        </li>
+
+        <li>
+          <a href="/cart" class="navbar-link">Cart</a>
+        </li>
+
+        <li>
+          <a href="/products" class="navbar-link">Admin</a>
+        </li>
+
+        <li>
+          <a href="/categories" class="navbar-link">Categories</a>
+        </li>
+
+        <li>
+          <a href="/order" class="navbar-link">Orders</a>
+        </li>
+
+
+        
+
+      </ul>
+
+    </nav>
+
+  </div>
+</header>

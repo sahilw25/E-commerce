@@ -8,7 +8,7 @@ router.get('/', getAdminProductPage);
 
 router.get('/add', getAddProductPage);
 
-router.post('/add', postAddProductPage);
+router.post('/add',postAddProductPage);
 
 router.get('/edit/:productId', getEditProductPage);
 

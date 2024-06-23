@@ -1,7 +1,14 @@
+
+const https=require("https");
+
+const fs=require("fs");
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const rootDir = require('./util/path.js');
+
+
 
 const adminRoutes = require('./routes/admin');
 const homeRoutes = require('./routes/home');
@@ -15,15 +22,25 @@ const Cart = require('./models/CartModel.js');
 const CartItem = require('./models/CartItemModel.js');
 const Order = require('./models/OrderModel.js');
 const OrderItem = require('./models/OrderItemModel.js');
+const fileUpload = require("express-fileupload");
+const multer = require("multer");
 
 const app = express();
+
+
+
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//static files
+
+
 app.use(express.static(path.join(rootDir, 'public')));
-app.use('/css', express.static(path.join(rootDir, 'node_modules', 'bootstrap', 'dist', 'css')));
+app.use('/css', express.static(path.join(rootDir, 'node_modules', 'bootstrap', 'dist', 'css', 'public')));
+
+
+
+
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use((req, res, next) => {
@@ -81,13 +98,6 @@ sequelize
     console.log(error);
   });
 
-Category.sync()
-.then((result) => {
-    //console.log(result);
-})
-.catch((error) => {
-    console.log(error);
-});
 
 
 app.listen(3030, ()=> {
